@@ -7,6 +7,9 @@ PORT=${SPARK_MASTER_PORT:-7077}
 UI_PORT=${SPARK_MASTER_UI_PORT:-8080}
 
 echo "$(hostname -i) ${SERVICE}" >> /etc/hosts
+
+echo "Launching spark master in container for service ${SERVICE} on port ${PORT} with UI at ${UI_PORT}"
+
 # Run spark-class directly so that when it exits (or crashes), the pod restarts.
 /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master --ip ${SERVICE} --port ${PORT} --webui-port ${UI_PORT}
 

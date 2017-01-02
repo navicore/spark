@@ -14,6 +14,8 @@ if ! getent hosts ${SERVICE}; then
   exit 0
 fi
 
+echo "Launching spark workers in container for service ${SERVICE} with memory ${MEMORY} and UI at ${UI_PORT}"
+
 # Run spark-class directly so that when it exits (or crashes), the pod restarts.
 /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://${SERVICE}:7077 --webui-port ${UI_PORT} --executor-memory ${MEMORY}
 
