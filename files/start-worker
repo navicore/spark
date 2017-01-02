@@ -3,7 +3,7 @@
 . /start-common.sh
 
 SERVICE=${SPARK_SERVICE_NAME:-spark-master}
-MEMORY=${SPARK_SERVICE_NAME:-1G}
+MEMORY=${SPARK_EXECUTOR_MEMORY:-1G}
 UI_PORT=${SPARK_WORKER_UI_PORT:-8081}
 
 if ! getent hosts ${SERVICE}; then
