@@ -2,10 +2,12 @@
 
 . /start-common.sh
 
-SPARK_SERVICE_NAME=${SPARK_SERVICE_NAME:-spark-master}
+SERVICE=${SPARK_SERVICE_NAME:-spark-master}
+MEMORY=${SPARK_SERVICE_NAME:-1G}
+UI_PORT=${SPARK_WORKER_UI_PORT:-8081}
 
-if ! getent hosts ${SPARK_SERVICE_NAME}; then
-  echo "=== Cannot resolve the DNS entry for spark-master. Has the service been created yet, and is SkyDNS functional?"
+if ! getent hosts ${SERVICE}; then
+  echo "=== Cannot resolve the DNS entry for ${SERVICE}. Has the service been created yet, and is SkyDNS functional?"
   echo "=== See http://kubernetes.io/v1.1/docs/admin/dns.html for more details on DNS integration."
   echo "=== Sleeping 10s before pod exit."
   sleep 10
@@ -13,5 +15,5 @@ if ! getent hosts ${SPARK_SERVICE_NAME}; then
 fi
 
 # Run spark-class directly so that when it exits (or crashes), the pod restarts.
-/opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://${SPARK_SERVICE_NAME}:7077 --webui-port 8081
+/opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://${SERVICE}:7077 --webui-port ${UI_PORT} --executor-memory ${MEMORY}
 
