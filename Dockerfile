@@ -1,6 +1,7 @@
 FROM java:openjdk-8-jdk
 MAINTAINER Ed Sweeney <ed@onextent.com>
 
+EXPOSE 4040
 ENV hadoop_ver 2.6.1
 ENV spark_ver 2.0.2
 
