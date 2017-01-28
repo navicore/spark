@@ -33,5 +33,6 @@ ADD files/log4j.properties /opt/spark/conf/log4j.properties
 ADD files/start-common.sh files/start-worker files/start-master /
 ADD files/core-site.xml /opt/spark/conf/core-site.xml
 ADD files/spark-defaults.conf /opt/spark/conf/spark-defaults.conf
+ADD files/metrics.properties /opt/spark/conf/metrics.properties
 ENV PATH $PATH:/opt/spark/bin
 
